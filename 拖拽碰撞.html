@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css">
+			#div1{width: 300px;height: 300px;background: lightblue;position: absolute;top: 0;left: 0;/*border-radius: 50%;*/}
+			#div2{width: 200px;height: 200px;background: lightcoral;position: absolute;top:300px;left: 300px;/*border-radius: 50%;*/}
+		</style>
+	</head>
+	<body>
+		<div id="div1"></div>
+		<div id="div2"></div>
+	</body>
+</html>
+<script type="text/javascript">
+	var div1=document.getElementById("div1");
+	var div2=document.getElementById("div2");
+	function crash(a,b){
+		return !(a.offsetLeft>b.offsetLeft+b.offsetWidth||b.offsetLeft>a.offsetLeft+a.offsetWidth||a.offsetTop>b.offsetTop+b.offsetHeight||b.offsetTop>a.offsetTop+a.offsetHeight)
+	}
+	div1.onmousedown=function(event){
+		var 随便=event.clientX;
+		var clientY=event.clientY;
+		var a=div1.offsetLeft;
+		var b=div1.offsetTop;
+		document.onmousemove=function(event){
+			div1.style.left=event.clientX-随便+a+"px";
+			div1.style.top=event.clientY-clientY+b+"px";
+//			var peng=div1.offsetLeft>div2.offsetLeft+div2.offsetWidth||div2.offsetLeft>div1.offsetLeft+div1.offsetWidth||div1.offsetTop>div2.offsetTop+div2.offsetHeight||div2.offsetTop>div1.offsetTop+div1.offsetHeight;
+		console.log(crash(div1,div2))	
+			
+		}
+		document.onmouseup=function(){
+			document.onmousemove=null
+		}
+	}
+</script>
